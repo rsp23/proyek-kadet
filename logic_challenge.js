@@ -1,16 +1,44 @@
-let meja = 500000;
-let kursi = 200000;
-let lemari = 1000000;
+// konstanta untuk diskon total harga
+const MINIMUM_SPENDING_FOR_DISCOUNT = 500000;
+const DISCOUNT_RATE = 0.1;
+
+/** 
+    array untuk setiap harga yang dibeli
+    @param {Array} item_prices 
+*/
 
 
-function totalPrice(item1, item2, item3){
-    let total_price = item1 + item2 + item3;
+// fungsi untuk menghitung total harga dan juga untuk pemberian diskon
 
-    if(total_price > 500000){
-        total_price = total_price * 0.9;
+function calculateTotalPayment (item_prices){
+    // variabel untuk menyimpan total harga
+    let total_payment = 0;
+
+
+    //menjumlahkan setiap harga
+    for(let price of item_prices){
+        total_payment += price;
     }
 
-    return total_price;
+    //mengecek apakah dapat diskon, jika iya diberikan harga diskon
+    if(total_payment > MINIMUM_SPENDING_FOR_DISCOUNT){
+        total_payment -= total_payment * DISCOUNT_RATE;
+    }
+
+    return total_payment;
+
+
+
 }
 
-console.log(totalPrice(meja, kursi, lemari));
+// variabel untuk menyimpan setiap harga "contoh"
+let item_prices = [200000, 500000, 1000000];
+
+
+//mencoba program diatas, melihat hasil di console, dengan memanggil fungsi
+
+console.log(calculateTotalPayment(item_prices));
+
+
+
+
